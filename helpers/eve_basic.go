@@ -1,18 +1,22 @@
 package helpers
 
 import(
-	"encoding/json"
+	"fmt"
 	"time"
+	"encoding/json"
 )
 
 type EveBasicHelper struct{}
 
 var start time.Time
 
-func (hlpr EveBasicHelper) Panics(err error){ //error handling
+func (hlpr EveBasicHelper) Panics(err error) error{ //error handling
 	if err != nil{
+		fmt.Println("START >> ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR")
 		panic(err.Error())
+		fmt.Println("ENDIT >> ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR ---- ERROR")
 	}
+	return err
 }
 
 func (hlpr EveBasicHelper) GetCurrentTime() string{

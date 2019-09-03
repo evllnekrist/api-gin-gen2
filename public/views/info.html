@@ -2,11 +2,19 @@
 {{template "layout.nav"}}
 
 <center>
-	<h4>result ::</h4>
-	<br> 
+
+	{{if .message.error}}
 	<p>
-		{{.message}}
+		<h4>error ::</h4><br>
+		{{.message.error}}
 	</p>
+	{{else}}
+	<p>
+		<h4>result ::</h4><br>
+		{{.message.result}}
+	</p>
+	{{end}}
+
 </center>
 
 {{template "layout.foot"}}
