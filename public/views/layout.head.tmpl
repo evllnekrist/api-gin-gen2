@@ -32,6 +32,7 @@
 			}
 			.bg-emerald{
 				background-color: #2ecc71;
+				color: black;
 			}
 			.clr-emerald{
 				color: #2ecc71;
@@ -44,6 +45,10 @@
 			}
 			.pad-top{
 				padding-top: 15px;
+			}
+			.ft-dark{
+				color: black !important;
+				font-weight:600;
 			}
 			html { 
 				height:100vh; 
@@ -58,7 +63,7 @@
 				right:0; 
 				left:0; 
 				/*background-repeat: no-repeat;*/
-				background-image: url(/assets/image/green_wp9.jpg);
+				background-image: url(/assets/image/green_wp12.jpg);
 				background-size: cover;
 			}
 			a{
@@ -81,10 +86,14 @@
 			}
 			/*color pallete from --> https://flatuicolors.com/palette/defo*/
 		</style>
+
 		<link rel="stylesheet" href="/assets/bootstrap-4.1.1/css/bootstrap.css">
+
+		/*jquery harus di atas bootstrap punya js*/
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="/assets/bootstrap-4.1.1/js/bootstrap.min.js"></script>
 	</head>
-	<body>
+	<body style="color:grey">
 	<inner-body>
 
 {{end}}

@@ -1,5 +1,9 @@
 {{template "layout.head"}}
+{{if .message.auth}}
+{{template "layout.nav_auth"}}
+{{else}}
 {{template "layout.nav"}}
+{{end}}
 
 <center class="container" style="padding-top: 0px;padding-bottom: 200px">
     <h3 class="bg-emerald pad-full">Opss..</h3>

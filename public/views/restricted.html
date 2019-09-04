@@ -1,5 +1,9 @@
 {{template "layout.head"}}
+{{if .message.auth}}
+{{template "layout.nav_auth"}}
+{{else}}
 {{template "layout.nav"}}
+{{end}}
 
 <center>
 	<h2>restricted</h2>

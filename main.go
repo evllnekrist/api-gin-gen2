@@ -1,10 +1,10 @@
 package main
 
-import(
-	"net/http"
-	"runtime"
+import (
 	"api-gin-gen2/controllers"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"runtime"
 )
 
 //Enable CORS (Cross-Origin Resource Sharing) - using middleware
@@ -23,23 +23,26 @@ func main() {
 	router := gin.Default()
 	router.Use(CORS_Middleware())
 
-	router.GET("/", func(c *gin.Context){
+	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"goVersion": runtime.Version(),
 		})
 	})
 	auth := router.Group("/auth")
 	{
-		authController := new(controllers.AuthController)	
-		auth.GET("/trial", func(c *gin.Context){
+		authController := new(controllers.AuthController)
+		auth.GET("/trial", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "restricted.html", gin.H{"message": "welcome to trial page"})
 		})
-		auth.GET("/login", func(c *gin.Context){ c.HTML(http.StatusOK, "login.html", gin.H{}) })
-		auth.GET("/register", func(c *gin.Context){ c.HTML(http.StatusOK, "register.html", gin.H{}) })
-		auth.POST("/loginx", authController.Login);
-		auth.POST("/registerx", authController.Register);
+		auth.GET("/login", func(c *gin.Context) { c.HTML(http.StatusOK, "login.html", gin.H{}) })
+		auth.GET("/register", func(c *gin.Context) { c.HTML(http.StatusOK, "register.html", gin.H{}) })
+		auth.POST("/loginx", authController.Login)
+		auth.POST("/registerx", authController.Register)
+		auth.GET("/refreshx", authController.NewToken)
+		auth.GET("/logoutx", authController.Logout)
+		auth.GET("/list", authController.List)
 	}
-	router.NoRoute( func(c * gin.Context){
+	router.NoRoute(func(c *gin.Context) {
 		c.HTML(404, "404.html", gin.H{})
 	})
 
@@ -49,7 +52,7 @@ func main() {
 	router.Run(":8080")
 }
 
-/* 
+/*
 	prepare ::
 	- go get -u github.com/gin-gonic/gin
 	- go get github.com/go-sql-driver/mysql
@@ -59,5 +62,6 @@ func main() {
 	https://www.golangprograms.com/example-of-golang-crud-using-mysql-from-scratch.html
 	https://medium.com/@kiddy.xyz/tutorial-golang-rest-api-mysql-part-1-45cd9f4e75a6
 	https://medium.com/aubergine-solutions/how-i-handled-null-possible-values-from-database-rows-in-golang-521fb0ee267
+	https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/
 
 */

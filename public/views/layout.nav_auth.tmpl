@@ -1,9 +1,17 @@
-{{define "layout.nav"}}
+{{define "layout.nav_auth"}}
 
 		<nav class="navbar navbar-expand-sm bg-asphalt navbar-dark sticky-top">
 		  <a class="navbar-brand" href="/"><img src="/assets/image/html-tag3.png" alt="Jack!" height="40px" width="auto"></a>
 		  <ul class="navbar-nav">
-		  	<li class="nav-item"><a class="nav-link ft-dark" href="/auth/login/">login | </a></li>
+		  	<li class="btn-group dropright">
+			  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Auth&nbsp;&nbsp;&nbsp;&nbsp;</button>
+			  <ul class="dropdown-menu" role="menu">
+			    <li class="nav-item"><a class="nav-link ft-dark" href="/auth/register/">regist</a></li>
+			    <li class="nav-item"><a class="nav-link ft-dark" href="/auth/list/">users list</a></li>
+    			<li class="dropdown-divider"></li>
+			    <li class="nav-item"><a class="nav-link ft-dark" href="/auth/logout/">logout</a></li>
+			  </ul>
+		  	</li>
 		  </ul>
 		</nav>
 		<b class="bg-asphalt pad-full clr-emerald" style="float: right" id="date">today</b>
