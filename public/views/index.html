@@ -1,0 +1,19 @@
+{{template "layout.head"}}
+{{if .message.auth}}
+{{template "layout.nav_auth"}}
+{{else}}
+{{template "layout.nav"}}
+{{end}}
+
+<center>
+	<div class="container">
+	    <h3>Welcome to Gen2</h3>
+	    <subtitle>hello world !</subtitle>
+	    <br><br><br>
+	</div>
+
+	we were runnin on <a href="https://golang.org/">Golang</a> ver {{ .goVersion}} with 
+	<a href="https://github.com/Massad/gin-boilerplate" target="_blank" title="Gin Boilerplate">Gin Boilerplate</a> ver {{ .ginBoilerplateVersion}}	
+</center>
+
+{{template "layout.foot"}}

@@ -43,7 +43,7 @@ type Claim struct {
 
 // ----------------------------------------------------------------------------------- CRUD
 
-func CheckAuth(c *gin.Context) int {
+func (ctrl AuthController) CheckAuth(c *gin.Context) int {
 	// & returns the memory address of the following variable.
 	// * (asterisk) returns the value of the following variable (which should hold the memory address of a variable,
 	// unless you want to get weird output and possibly problems because you're accessing your computer's RAM)
@@ -51,7 +51,6 @@ func CheckAuth(c *gin.Context) int {
 	r := c.Request
 	data := make(map[string]interface{})
 
-	//----------------------------checking authentication START------------------------untuk dipindah ke fungsi lain
 	cookie, err_token := r.Cookie("gome_auth")
 
 	if err_token != nil {
@@ -102,8 +101,8 @@ func CheckAuth(c *gin.Context) int {
 
 func (ctrl AuthController) Register(c *gin.Context) {
 	data := make(map[string]interface{})
-	data["auth"] = CheckAuth(c)
-	if data["auth"] == 0 { //kalau tdk terotentifikasi, tdk lanjut
+	data["auth"] = ctrl.CheckAuth(c) //memang dia memanggil dirinya sendiri (fx beda), tp fx ini sdh didaftarkan sbg ctrl AuthController yang membuat dia jadi global
+	if data["auth"] == 0 {           //kalau tdk terotentifikasi, tdk lanjut
 		return
 	}
 
@@ -151,6 +150,8 @@ func (ctrl AuthController) Login(c *gin.Context) {
 			data["error"] = "password not match"
 			user = Users{}
 		} else if err_str == nil && user.password == pwd { //if no problem & password is match
+
+			//----------------------------make token START------------------------
 			loc, _ := time.LoadLocation("Asia/Jakarta")
 			expirationTime := time.Now().In(loc).Add(5 * time.Minute) //set expirasi to 5 menit
 			claim := &Claim{
@@ -174,6 +175,7 @@ func (ctrl AuthController) Login(c *gin.Context) {
 				Value:   tokenString,
 				Expires: expirationTime,
 			})
+			//----------------------------make token END--------------------------
 
 		} else {
 			data["error"] = err_str
@@ -190,7 +192,7 @@ func (ctrl AuthController) Login(c *gin.Context) {
 func (ctrl AuthController) List(c *gin.Context) { //untested yet
 
 	data := make(map[string]interface{})
-	data["auth"] = CheckAuth(c)
+	data["auth"] = ctrl.CheckAuth(c)
 	if data["auth"] == 0 { //kalau tdk terotentifikasi, tdk lanjut
 		return
 	}
