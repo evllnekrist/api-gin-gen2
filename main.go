@@ -58,7 +58,7 @@ func main() {
 		})
 		asm.GET("/compiler-phases/scanner", asmController.Scanner)
 		asm.GET("/compiler-phases/parser/:act", asmController.Parser)
-		// asm.GET("/compiler-phases/code-generator", asmController.CodeGenerator)
+		asm.GET("/compiler-phases/code-generator", asmController.CodeGenerator)
 	}
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(404, "404.html", gin.H{"message": data})

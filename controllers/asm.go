@@ -103,3 +103,9 @@ func (ctrl AsmController) Parser(c *gin.Context) {
 	ASM_Close(" PARSER ", act)
 	http.Redirect(c.Writer, c.Request, "localhost:8080/", http.StatusSeeOther)
 } // a phase of the compiler that converts the tokens into an Abstract Syntax Tree (AST)
+
+func (ctrl AsmController) CodeGenerator(c *gin.Context) {
+	http.Redirect(c.Writer, c.Request, "https://github.com/golang/go/tree/master/src/cmd/compile/internal/ssa", http.StatusSeeOther)
+}
+
+// CASE [1] END
